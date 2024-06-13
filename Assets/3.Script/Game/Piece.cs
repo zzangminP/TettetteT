@@ -4,176 +4,78 @@ public class Piece : MonoBehaviour
 {
     public Board board { get; private set; }
     public TetrominoData data { get; private set; }
-
     public Vector3Int[] cells { get; private set; }
     public Vector3Int position { get; private set; }
 
-    
 
-
-    private float lockTime;
-    private float stepTime;
-    private float moveTime;
-    //
-    private void Start()
+    //초기설정
+    public void Initialize(Board board, Vector3Int position, TetrominoData data)
     {
-        
-    }
-
-    //private void U
-    public void Initialize(Board board, Vector3Int position, TetrominoData data )
-    {
+        this.data = data;
         this.board = board;
         this.position = position;
-        this.data = data;
 
-        //stepTime = Time.time;
-        //delayTime = Time.time - Time.deltaTime;
 
-        if(this.cells == null)
+
+        if (cells == null)
         {
-            this.cells = new Vector3Int[data.cells.Length];
+            cells = new Vector3Int[data.cells.Length];
         }
 
-        for (int i = 0; i < data.cells.Length; i++)
+        for (int i = 0; i < cells.Length; i++)
         {
-            this.cells[i] = (Vector3Int)data.cells[i];
+            cells[i] = (Vector3Int)data.cells[i];
         }
     }
 
-    /*
+    // 키조작
     private void Update()
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
+        this.board.Clear(this);
+
+        //왼쪽키
+        if(Input.GetKeyDown(KeyCode.LeftArrow))
         {
+            
             Move(Vector2Int.left);
-            //transform.position += Vector3.left;
+            Debug.Log("입력 : 왼쪽");
         }
-        if (Input.GetKey(KeyCode.RightArrow))
+        //오른쪽키
+        if(Input.GetKeyDown(KeyCode.RightArrow))
         {
+           
             Move(Vector2Int.right);
-            //transform.position += Vector3.right;
+            Debug.Log("입력 : 오른쪽");
         }
-        if (Input.GetKey(KeyCode.DownArrow))
+        //아래키
+        if(Input.GetKeyDown(KeyCode.DownArrow))
         {
+            
             Move(Vector2Int.down);
-            //transform.position += Vector3.down;
+            Debug.Log("입력 : 아래쪽");
+            
         }
-        
-        //if (Input.GetKey(KeyCode.UpArrow))
-        //{
-        //    //transform.position += Vector3.up;
-        //}
+
+        this.board.Set(this);
     }
 
-    */
+    //테트로미노 움직임
     private bool Move(Vector2Int translation)
     {
-        Vector3Int newPosition = position;
+        Vector3Int newPosition = this.position;
         newPosition.x += translation.x;
         newPosition.y += translation.y;
 
         bool valid = board.IsValidPosition(this, newPosition);
 
-        
         // Only save the movement if the new position is valid
         if (valid)
         {
-            position = newPosition;
-            moveTime = Time.time + Time.deltaTime;
-            lockTime = 0f; // reset
+            this.position = newPosition;
+
         }
 
         return valid;
     }
-
-
-    private void Update()
-    {
-        //board.Clear(this);
-
-        // We use a timer to allow the player to make adjustments to the piece
-        // before it locks in place
-        lockTime += Time.deltaTime;
-        /*
-        // Handle rotation
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            Rotate(-1);
-        }
-        else if (Input.GetKeyDown(KeyCode.E))
-        {
-            Rotate(1);
-        }
-
-        // Handle hard drop
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            HardDrop();
-        }*/
-
-        // Allow the player to hold movement keys but only after a move delay
-        // so it does not move too fast
-        if (Time.time > moveTime)
-        {
-            HandleMoveInputs();
-        }
-
-        /*// Advance the piece to the next row every x seconds
-        if (Time.time > stepTime)
-        {
-            Step();
-        }
-
-        board.Set(this);*/
-    }
-
-    private void HandleMoveInputs()
-    {
-        // Soft drop movement
-        if (Input.GetKey(KeyCode.S))
-        {
-            if (Move(Vector2Int.down))
-            {
-                // Update the step time to prevent double movement
-                stepTime = Time.time + Time.deltaTime;//stepDelay;
-                //if()
-            }
-        }
-
-        // Left/right movement
-        if (Input.GetKey(KeyCode.A))
-        {
-            Move(Vector2Int.left);
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            Move(Vector2Int.right);
-        }
-    }
-
-    /*
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
-    }*/
-
-
-
-
-
-
-    /*
-    private bool IsBorder()
-    {
-        if (this.position.x == board.tilemap.localBounds.max.x ||
-            this.position.x == board.tilemap.localBounds.min.x ||
-            )
-        {
-            return true;
-        }
-        else
-            return false;
-    }
-    */
+    
 }
