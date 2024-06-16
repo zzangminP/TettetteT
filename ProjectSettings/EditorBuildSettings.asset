@@ -5,7 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/1.Scene/Tetris.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/1.Scene/Title.unity
+    guid: fa3d067c53bf01f4bac7429781bdca31
+  - enabled: 1
+    path: Assets/1.Scene/Stage1.unity
+    guid: 4805ba0f642f3344880d84fc55a3da1a
+  - enabled: 1
+    path: Assets/1.Scene/GameOver.unity
+    guid: 2239ff2ad6887e243aaa86c6e31be0e1
   m_configObjects: {}
