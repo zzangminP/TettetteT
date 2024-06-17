@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
@@ -29,7 +30,7 @@ public class Stage : MonoBehaviour
     //목표 라인
     [SerializeField]
     private int goalLine;
-    private int currentLineCount;
+    public int deletedLineCount =0;
 
     private GameObject particleEffect;
     public GameObject particlePrefab;
@@ -258,8 +259,8 @@ public class Stage : MonoBehaviour
                     Destroy(tile.gameObject);
                 }
                 //지운 줄 몇개인지 카운트
-                currentLineCount++;
-
+                deletedLineCount++;
+                //CheckGoal();
                 //카메라 흔들림
                 var tmp = cmrShake.shakeAmount;
                 cmrShake.shakeAmount = 1.5f;
@@ -380,8 +381,7 @@ public class Stage : MonoBehaviour
         //InstantiateParticleEffect();
     }
 
-
-    void Update()
+    void HandleInput()
     {
         Vector3 moveDir = Vector3.zero;
         bool isRotate = false;
@@ -413,7 +413,7 @@ public class Stage : MonoBehaviour
         {
             Debug.Log("space 누름");
             HardDrop();
-            
+
             //InstantiateParticleEffect();
 
         }
@@ -434,6 +434,26 @@ public class Stage : MonoBehaviour
         {
             UpdateGhostPosition();
         }
+    }
+
+    /*void CheckGoal()
+    {
+        if(deletedLineCount==goalLine)
+        {
+            //SceneManager.LoadScene("StageClear");
+
+        }
+        else
+        {
+            return;
+        }
+    }*/
+
+
+    void Update()
+    {
+        HandleInput();
+        
     }
 
 }

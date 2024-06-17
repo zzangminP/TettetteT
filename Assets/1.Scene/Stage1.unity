@@ -830,6 +830,7 @@ GameObject:
   - component: {fileID: 1083938616}
   - component: {fileID: 1083938618}
   - component: {fileID: 1083938617}
+  - component: {fileID: 1083938619}
   m_Layer: 5
   m_Name: CurrentDeletedLine
   m_TagString: Untagged
@@ -889,7 +890,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 
 --- !u!222 &1083938618
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -898,6 +899,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1083938615}
   m_CullTransparentMesh: 1
+--- !u!114 &1083938619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083938615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aacfdee0eca393408bbde0e84ee8546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deletedLineText: {fileID: 1083938617}
+  currentStage: {fileID: 1153124696}
 --- !u!1 &1147588347
 GameObject:
   m_ObjectHideFlags: 0
@@ -1072,6 +1087,7 @@ MonoBehaviour:
   boardHeight: 20
   fallCycle: 0.875
   goalLine: 0
+  deletedLineCount: 0
   particlePrefab: {fileID: 8117973386823955798, guid: c2362119fe149cd4b8ad89cd2a013da3, type: 3}
 --- !u!1 &1204165623
 GameObject:
