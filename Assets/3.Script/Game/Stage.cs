@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class Stage : MonoBehaviour
 {
@@ -25,7 +26,52 @@ public class Stage : MonoBehaviour
     private Transform currentTetromino;
     private int nextTetrominoIndex;
 
+    //목표 라인
+    [SerializeField]
+    private int goalLine;
+    private int currentLineCount;
+
+    private GameObject particleEffect;
+    public GameObject particlePrefab;
+
+
     private bool isGameover = false;
+    private bool isHardDrop = false;
+
+
+    //private void OnDestroy()
+    //{
+    //    InstantiateParticleEffect();
+    //}
+
+
+    private CameraShake cmrShake;
+
+
+
+
+
+    //파티클
+    void InstantiateParticleEffect()
+    {
+        // 현재 블록의 위치에 파티클 시스템을 생성합니다.
+        GameObject particleEffect = Instantiate(particlePrefab, new Vector3(ghostTetromino.position.x, ghostTetromino.position.y - 1, 0), Quaternion.identity);
+
+        //particleEffect.transform.SetParent(ghostTetromino);
+        // 파티클 시스템을 재생합니다.
+        ParticleSystem ps = particleEffect.GetComponent<ParticleSystem>();
+        if (ps != null)
+        {
+            ps.Play();
+
+        }
+
+
+        // 파티클 시스템이 재생이 끝나면 자동으로 오브젝트를 파괴합니다.
+        //Destroy(particleEffect, ps.main.duration);
+    }
+
+
 
 
     void SpawnNextTetromino()
@@ -48,10 +94,10 @@ public class Stage : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        tetrominoFactory.CreateTetromino(nextTetrominoIndex, nextTetrominoNode, new Vector3(-12.8f,7.7f,0));
+        tetrominoFactory.CreateTetromino(nextTetrominoIndex, nextTetrominoNode, new Vector3(-12.8f, 7.7f, 0));
     }
 
-    bool MoveTetromino(Vector3 moveDir, bool isRotate)
+    bool MoveTetromino(Vector3 moveDir, bool isRotate, bool isHardDrop)
     {
         if (currentTetromino == null)
         {
@@ -75,12 +121,18 @@ public class Stage : MonoBehaviour
 
             if ((int)moveDir.y == -1 && (int)moveDir.x == 0 && !isRotate)
             {
+
+                if (isHardDrop)
+                {
+                    InstantiateParticleEffect();
+                }
+
                 AddToBoard(currentTetromino);
                 DestroyGhostTetromino();
                 CheckBoardColumn();
                 SpawnNextTetromino();
 
-                if(!CanMoveTo(currentTetromino))
+                if (!CanMoveTo(currentTetromino))
                 {
                     isGameover = true;
                     SceneManager.LoadScene("GameOver");
@@ -205,9 +257,18 @@ public class Stage : MonoBehaviour
                 {
                     Destroy(tile.gameObject);
                 }
+                //지운 줄 몇개인지 카운트
+                currentLineCount++;
+
+                //카메라 흔들림
+                var tmp = cmrShake.shakeAmount;
+                cmrShake.shakeAmount = 1.5f;
+                cmrShake.ShakeForTime(1);
+                cmrShake.shakeAmount = tmp;
 
                 column.DetachChildren();
                 isCleared = true;
+
             }
         }
 
@@ -272,9 +333,21 @@ public class Stage : MonoBehaviour
         return true;
     }
 
+    
+    //IEnumerator Wait_co()
+    //{
+    //    yield return new WaitForSeconds(5f);
+    //}
 
-    void Start()
+    public void Start()
     {
+
+
+        //CountdownController cnt = GetComponent<CountdownController>();
+        //cnt.GetReady();
+
+        cmrShake = GameObject.FindWithTag("MainCamera").GetComponent<CameraShake>();
+
         if (tetrominoFactory == null)
         {
             Debug.LogError("TetrominoFactory is not assigned.");
@@ -300,6 +373,13 @@ public class Stage : MonoBehaviour
         nextTetrominoIndex = Random.Range(0, 7);
         SpawnNextTetromino();
     }
+    void HardDrop()
+    {
+        while (MoveTetromino(Vector3.down, false, true)) { }
+        cmrShake.ShakeForTime(0.5f);
+        //InstantiateParticleEffect();
+    }
+
 
     void Update()
     {
@@ -308,25 +388,34 @@ public class Stage : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
+            Debug.Log("왼쪽 누름");
             moveDir.x = -1;
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
+            Debug.Log("오른쪽 누름");
             moveDir.x = 1;
         }
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
+
+            Debug.Log("Z누름");
             isRotate = true;
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
+            Debug.Log("아래 누름");
             moveDir.y = -1;
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            while (MoveTetromino(Vector3.down, false)) { }
+            Debug.Log("space 누름");
+            HardDrop();
+            
+            //InstantiateParticleEffect();
+
         }
 
         if (Time.time > nextFallTime)
@@ -338,7 +427,7 @@ public class Stage : MonoBehaviour
 
         if (moveDir != Vector3.zero || isRotate)
         {
-            MoveTetromino(moveDir, isRotate);
+            MoveTetromino(moveDir, isRotate, false);
         }
 
         if (ghostTetromino != null)

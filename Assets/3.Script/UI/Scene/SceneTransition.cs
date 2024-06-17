@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneTransition : MonoBehaviour
 {
     public Image fadeImage; // 페이드 효과를 줄 이미지
+    //public Scene sceneName;
 
     private void Start()
     {

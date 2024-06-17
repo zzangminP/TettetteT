@@ -4,14 +4,20 @@ public class TetrominoFactory : MonoBehaviour
 {
     public GameObject tilePrefab;
 
+
+    //public ParticleSystem effect;
+    //public GameObject effectPrefab;
+
     public Transform CreateTetromino(int index, Transform parent, Vector3 position, bool isGhost = false)
     {
         Color32 color = Color.white;
 
         Transform tetromino = new GameObject(isGhost ? "GhostTetromino" : "Tetromino").transform;
+        //effect = gameObject.AddComponent<ParticleSystem>();
         tetromino.SetParent(parent);
         tetromino.localPosition = position;
         tetromino.localRotation = Quaternion.identity;
+        //tetromino.GetComponent<ParticleSystem>();
 
         switch (index)
         {
@@ -91,12 +97,19 @@ public class TetrominoFactory : MonoBehaviour
 
     private void CreateTile(Transform parent, Vector2 position, Color color, int order = 1)
     {
+        //var effectGoObj = Instantiate(effectPrefab);
+        //ParticleSystem effectGo = effectGoObj.GetComponent<ParticleSystem>();
         var go = Instantiate(tilePrefab);
+        //GameObject particleEffect = Instantiate(effectPrefab, transform.position, Quaternion.identity);
+        //ParticleSystem ps = particleEffect.GetComponent<ParticleSystem>();
+
         go.transform.parent = parent;
         go.transform.localPosition = position;
+       
 
         var tile = go.GetComponent<Tile>();
         tile.color = color;
         tile.sortingOrder = order;
+        
     }
 }
