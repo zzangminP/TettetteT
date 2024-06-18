@@ -76,6 +76,75 @@ public class TetrominoFactory : MonoBehaviour
                 CreateTile(tetromino, new Vector2(0f, 0f), color);
                 CreateTile(tetromino, new Vector2(1f, 0f), color);
                 break;
+
+            case 7: // ½ÊÀÚ¸ð¾ç : Èò»ö
+                color = new Color32(255, 255, 255, 255);
+                CreateTile(tetromino, new Vector2(1f, 0f), color);
+                CreateTile(tetromino, new Vector2(-1f, 0f), color);
+                CreateTile(tetromino, new Vector2(0f, 1f), color);
+                CreateTile(tetromino, new Vector2(0f, 0f), color);
+                CreateTile(tetromino, new Vector2(0f, -1f), color);
+                break;
+
+            case 8: // 5Ä­ °è´Ü¸ð¾ç : ÇÎÅ©
+                color = new Color32(255, 0, 174, 255);
+                CreateTile(tetromino, new Vector2(-1f, 1f), color);
+                CreateTile(tetromino, new Vector2(0f, 0f), color);
+                CreateTile(tetromino, new Vector2(0f, 1f), color);
+                CreateTile(tetromino, new Vector2(1f, -1f), color);
+                CreateTile(tetromino, new Vector2(1f, 0f), color);
+                break;
+
+            case 9: // 5Ä­ ¤§¸ð¾ç : °ËÀº»ö
+                color = new Color32(0, 0, 0, 255);
+                CreateTile(tetromino, new Vector2(-1f, 0f), color);
+                CreateTile(tetromino, new Vector2(0f, 0f), color);
+                CreateTile(tetromino, new Vector2(1f, 0f), color);
+                CreateTile(tetromino, new Vector2(-1f, 1f), color);
+                CreateTile(tetromino, new Vector2(1f, 1f), color);
+                break;
+
+            case 10: // 5Ä­ µûºÀ¸ð¾ç : ¹º»öÀÎÁö¸ð¸§
+                color = new Color32(169, 4, 250, 255);
+                CreateTile(tetromino, new Vector2(-1f, 0f), color);
+                CreateTile(tetromino, new Vector2(0f, 0f), color);
+                CreateTile(tetromino, new Vector2(-1f, 1f), color);
+                CreateTile(tetromino, new Vector2(-1f, -1f), color);
+                CreateTile(tetromino, new Vector2(0f, -1f), color);
+                break;
+
+            case 11: // 5Ä­ µûºÀ¸ð¾ç ÁÂ¿ì ¹ÝÀü : ¹º»öÀÎÁö¸ð¸§
+                color = new Color32(4, 200, 169, 255);
+                CreateTile(tetromino, new Vector2(-1f, 0f), color);
+                CreateTile(tetromino, new Vector2(0f, 0f), color);
+                CreateTile(tetromino, new Vector2(0f, 1f), color);
+                CreateTile(tetromino, new Vector2(-1f, -1f), color);
+                CreateTile(tetromino, new Vector2(0f, -1f), color);
+                break;
+
+            case 12: // 1Ä­ : »ö»ó ·£´ý
+                color = new Color32((byte)Random.Range(0, 256), (byte)Random.Range(0, 256), (byte)Random.Range(0, 256), 255);
+                CreateTile(tetromino, new Vector2(0f, 0f), color);
+                break;
+                /*
+            case 11: // T Å«°Å
+                color = new Color32(250, 180, 51, 255);
+                CreateTile(tetromino, new Vector2(-1f, 0f), color);
+                CreateTile(tetromino, new Vector2(0f, 0f), color);
+                CreateTile(tetromino, new Vector2(1f, 0f), color);
+                CreateTile(tetromino, new Vector2(0f, 1f), color);
+                CreateTile(tetromino, new Vector2(0f, 2f), color);
+                break;
+            */
+                /*
+                case 10: // 5Ä­ ¹«Áö°³°°Àº ¸ð¾ç : ¹«Áö°³
+                   color = new Color(Mathf.Sin(Time.time), Mathf.Cos(Time.time), Mathf.Sin(Time.time / 2));
+                    CreateTile(tetromino, new Vector2(-1f, -1f), color);
+                    CreateTile(tetromino, new Vector2(0f, 0f), color);
+                    CreateTile(tetromino, new Vector2(1f, -1f), color);
+                    CreateTile(tetromino, new Vector2(-2f, -2f), color);
+                    CreateTile(tetromino, new Vector2(2f, -2f), color);
+                    break;*/
         }
 
         if (isGhost)
@@ -105,12 +174,12 @@ public class TetrominoFactory : MonoBehaviour
 
         go.transform.parent = parent;
         go.transform.localPosition = position;
-       
+
 
         var tile = go.GetComponent<Tile>();
         tile.color = color;
         tile.sortingOrder = order;
-        
+
     }
 }
 

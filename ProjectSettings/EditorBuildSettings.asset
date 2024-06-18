@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/1.Scene/HowToPlay.unity
     guid: 8966708539c40724aa4f203ffd0eef5d
+  - enabled: 1
+    path: Assets/1.Scene/SelectBlocks.unity
+    guid: e3a857ca010a1f5449a57ddeade969ad
   m_configObjects: {}

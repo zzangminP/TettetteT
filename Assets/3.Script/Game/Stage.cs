@@ -84,7 +84,7 @@ public class Stage : MonoBehaviour
 
         currentTetromino = tetrominoFactory.CreateTetromino(nextTetrominoIndex, tetrominoNode, new Vector3(0, halfHeight, 0));
         CreateGhostTetromino(); // 고스트 테트로미노 생성
-        nextTetrominoIndex = Random.Range(0, 7);
+        nextTetrominoIndex = Random.Range(0, 13); // 테트로미노 인덱스 범위 Random.Range(0, 7);
         DisplayNextTetromino();
     }
 
@@ -371,7 +371,8 @@ public class Stage : MonoBehaviour
             col.transform.parent = boardNode;
         }
 
-        nextTetrominoIndex = Random.Range(0, 7);
+        
+        nextTetrominoIndex = Random.Range(0, 13); // 테트로미노 인덱스 범위 Range   Random.Range(0, 7);
         SpawnNextTetromino();
     }
     void HardDrop()
