@@ -15,7 +15,7 @@ public class GetBlockIndex : MonoBehaviour
     {
         int[] a = new int[7];
 
-        //Debug.Log();
+        //Debug.Log(transform.childCount);
         //img = transform.GetChild();
         for(int i = 0; i < transform.childCount; i++)
         {
@@ -23,12 +23,12 @@ public class GetBlockIndex : MonoBehaviour
             grandChild = child.GetChild(0);
             img = grandChild.GetComponent<Image>();
             name = img.sprite.name;
-            a[i] = int.Parse(name);
+            a[i] = int.Parse(name) - 1;
         }
 
-        foreach (int i in a)
+        foreach (int j in a)
         {
-            Debug.Log(a[i]);
+            Debug.Log(j);
         }
 
         //Debug.Log(child);

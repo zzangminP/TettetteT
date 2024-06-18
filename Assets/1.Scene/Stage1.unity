@@ -1086,7 +1086,7 @@ MonoBehaviour:
   boardWidth: 10
   boardHeight: 20
   fallCycle: 0.875
-  goalLine: 0
+  goalLine: 10
   deletedLineCount: 0
   particlePrefab: {fileID: 8117973386823955798, guid: c2362119fe149cd4b8ad89cd2a013da3, type: 3}
 --- !u!1 &1204165623

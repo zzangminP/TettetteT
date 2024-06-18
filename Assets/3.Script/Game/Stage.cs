@@ -260,7 +260,7 @@ public class Stage : MonoBehaviour
                 }
                 //지운 줄 몇개인지 카운트
                 deletedLineCount++;
-                //CheckGoal();
+                CheckGoal();
                 //카메라 흔들림
                 var tmp = cmrShake.shakeAmount;
                 cmrShake.shakeAmount = 1.5f;
@@ -437,18 +437,15 @@ public class Stage : MonoBehaviour
         }
     }
 
-    /*void CheckGoal()
+    void CheckGoal()
     {
-        if(deletedLineCount==goalLine)
+        if(deletedLineCount>=goalLine)
         {
-            //SceneManager.LoadScene("StageClear");
+            SceneManager.LoadScene("SelectBlocks");
 
         }
-        else
-        {
-            return;
-        }
-    }*/
+
+    }
 
 
     void Update()
