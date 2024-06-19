@@ -7,6 +7,9 @@ public class BlockSlotSetActive : MonoBehaviour
 
     void Start()
     {
+
+        BlockSlots = new Transform[4];
+
         switch (GameManager.instance.currentStage)
         {
 

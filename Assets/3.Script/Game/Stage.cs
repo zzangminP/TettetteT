@@ -360,15 +360,15 @@ public class Stage : MonoBehaviour
         switch(GameManager.instance.currentStage)
         {
             case 1:
-                goalLine = 10;
+                goalLine = 1;
                 break;
             
             case 2:
-                goalLine = 20;
+                goalLine = 1;
                 break;
             
             case 3:
-                goalLine = 30;
+                goalLine = 1;
                 break;
         }
 
