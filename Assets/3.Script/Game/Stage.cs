@@ -28,8 +28,8 @@ public class Stage : MonoBehaviour
     private int nextTetrominoIndex;
 
     //목표 라인
-    [SerializeField]
-    private int goalLine;
+    //[SerializeField]
+    public int goalLine;
     public int deletedLineCount =0;
 
     private GameObject particleEffect;
@@ -55,11 +55,11 @@ public class Stage : MonoBehaviour
     //파티클
     void InstantiateParticleEffect()
     {
-        // 현재 블록의 위치에 파티클 시스템을 생성합니다.
+        // 현재 블록의 위치에 파티클 시스템을 생성
         GameObject particleEffect = Instantiate(particlePrefab, new Vector3(ghostTetromino.position.x, ghostTetromino.position.y - 1, 0), Quaternion.identity);
 
         //particleEffect.transform.SetParent(ghostTetromino);
-        // 파티클 시스템을 재생합니다.
+        // 파티클 시스템을 재생
         ParticleSystem ps = particleEffect.GetComponent<ParticleSystem>();
         if (ps != null)
         {
@@ -68,7 +68,7 @@ public class Stage : MonoBehaviour
         }
 
 
-        // 파티클 시스템이 재생이 끝나면 자동으로 오브젝트를 파괴합니다.
+        
         //Destroy(particleEffect, ps.main.duration);
     }
 
@@ -84,7 +84,8 @@ public class Stage : MonoBehaviour
 
         currentTetromino = tetrominoFactory.CreateTetromino(nextTetrominoIndex, tetrominoNode, new Vector3(0, halfHeight, 0));
         CreateGhostTetromino(); // 고스트 테트로미노 생성
-        nextTetrominoIndex = Random.Range(0, 13); // 테트로미노 인덱스 범위 Random.Range(0, 7);
+        //nextTetrominoIndex = Random.Range(0, 13); // 테트로미노 인덱스 범위 Random.Range(0, 7);
+        nextTetrominoIndex = GameManager.instance.choosedTetroIndex[Random.Range(0, 7)];
         DisplayNextTetromino();
     }
 
@@ -349,13 +350,32 @@ public class Stage : MonoBehaviour
 
         cmrShake = GameObject.FindWithTag("MainCamera").GetComponent<CameraShake>();
 
+        /*
         if (tetrominoFactory == null)
         {
             Debug.LogError("TetrominoFactory is not assigned.");
             return;
+        }*/
+
+        switch(GameManager.instance.currentStage)
+        {
+            case 1:
+                goalLine = 10;
+                break;
+            
+            case 2:
+                goalLine = 20;
+                break;
+            
+            case 3:
+                goalLine = 30;
+                break;
         }
 
-        tetrominoFactory.tilePrefab = tilePrefab; // 팩토리에 타일 프리팹 할당
+
+
+        // 팩토리에 타일 프리팹 할당
+        tetrominoFactory.tilePrefab = tilePrefab; 
 
         halfWidth = Mathf.RoundToInt(boardWidth * 0.5f);
         halfHeight = Mathf.RoundToInt(boardHeight * 0.5f);
@@ -364,15 +384,17 @@ public class Stage : MonoBehaviour
 
         CreateBackground();
 
-        for (int i = 0; i < boardHeight; ++i)
+        for (int i = 0; i < boardHeight; i++)
         {
             var col = new GameObject((boardHeight - i - 1).ToString());
             col.transform.position = new Vector3(0, halfHeight - i, 0);
             col.transform.parent = boardNode;
         }
 
-        
-        nextTetrominoIndex = Random.Range(0, 13); // 테트로미노 인덱스 범위 Range   Random.Range(0, 7);
+
+        //nextTetrominoIndex = Random.Range(0, 13); // 테트로미노 인덱스 범위 Range   Random.Range(0, 7);
+        //내가 고른거만 나오게
+        nextTetrominoIndex = GameManager.instance.choosedTetroIndex[Random.Range(0, 7)];
         SpawnNextTetromino();
     }
     void HardDrop()
@@ -441,6 +463,11 @@ public class Stage : MonoBehaviour
     {
         if(deletedLineCount>=goalLine)
         {
+            if(GameManager.instance.currentStage ==3)
+            {
+                SceneManager.LoadScene("GameOver");
+            }
+            //GameManager.instance.CurrentStage++;
             SceneManager.LoadScene("SelectBlocks");
 
         }

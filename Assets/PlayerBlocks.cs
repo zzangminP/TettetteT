@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class PlayerBlocks : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    public int[] choosedTetroIndex = new int[7];
+
     void Start()
     {
+
+        for(int i = 0; i< choosedTetroIndex.Length; i++)
+        {
+            choosedTetroIndex[i] = i;
+            Debug.Log(choosedTetroIndex[i]);
+        }
         
     }
 

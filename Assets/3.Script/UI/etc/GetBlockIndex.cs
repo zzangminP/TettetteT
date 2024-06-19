@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GetBlockIndex : MonoBehaviour
 {
@@ -10,27 +11,40 @@ public class GetBlockIndex : MonoBehaviour
     public Transform child;
     public Transform grandChild;
     public int[] a;
-
+    
+    private Transform pb;
+    private PlayerBlocks pbs;
     public void CheckBlockIndex()
     {
-        int[] a = new int[7];
+        //int[] a = new int[7];
+        //pb = 
 
-        //Debug.Log(transform.childCount);
-        //img = transform.GetChild();
+        //pb = GameManager.instance.transform.Find("PlayerBlocks");
+        //pbs = pb.GetComponent<PlayerBlocks>();
+        
         for(int i = 0; i < transform.childCount; i++)
         {
             child = transform.GetChild(i);
             grandChild = child.GetChild(0);
             img = grandChild.GetComponent<Image>();
             name = img.sprite.name;
-            a[i] = int.Parse(name) - 1;
+            //a[i] = int.Parse(name) - 1;
+            GameManager.instance.choosedTetroIndex[i] = int.Parse(name) - 1;
         }
 
-        foreach (int j in a)
+        //foreach (int j in a)
+        //{
+        //    Debug.Log(j);
+        //}
+        //pb.choosedTetroIndex = a;
+
+        foreach (int j in GameManager.instance.choosedTetroIndex)
         {
             Debug.Log(j);
         }
 
+        GameManager.instance.currentStage++;
+        SceneManager.LoadScene("Stage1");
         //Debug.Log(child);
         //
         //
