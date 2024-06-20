@@ -21,30 +21,38 @@ public class GetBlockIndex : MonoBehaviour
 
         //pb = GameManager.instance.transform.Find("PlayerBlocks");
         //pbs = pb.GetComponent<PlayerBlocks>();
-        
-        for(int i = 0; i < transform.childCount; i++)
+        try
         {
-            child = transform.GetChild(i);
-            grandChild = child.GetChild(0);
-            img = grandChild.GetComponent<Image>();
-            name = img.sprite.name;
-            //a[i] = int.Parse(name) - 1;
-            GameManager.instance.choosedTetroIndex[i] = int.Parse(name) - 1;
+
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                child = transform.GetChild(i);
+                grandChild = child.GetChild(0);
+                img = grandChild.GetComponent<Image>();
+                name = img.sprite.name;
+                //a[i] = int.Parse(name) - 1;
+                GameManager.instance.choosedTetroIndex[i] = int.Parse(name) - 1;
+            }
+
+            //foreach (int j in a)
+            //{
+            //    Debug.Log(j);
+            //}
+            //pb.choosedTetroIndex = a;
+
+            foreach (int j in GameManager.instance.choosedTetroIndex)
+            {
+                Debug.Log(j);
+            }
+
+
+            GameManager.instance.currentStage++;
+            SceneManager.LoadScene("Stage1");
         }
-
-        //foreach (int j in a)
-        //{
-        //    Debug.Log(j);
-        //}
-        //pb.choosedTetroIndex = a;
-
-        foreach (int j in GameManager.instance.choosedTetroIndex)
+        catch
         {
-            Debug.Log(j);
+            Debug.Log("7개의 테트로미노 선택해야함");
         }
-
-        GameManager.instance.currentStage++;
-        SceneManager.LoadScene("Stage1");
         //Debug.Log(child);
         //
         //

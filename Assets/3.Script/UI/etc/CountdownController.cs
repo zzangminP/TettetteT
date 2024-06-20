@@ -5,18 +5,27 @@ using System.Collections;
 
 public class CountdownController : MonoBehaviour
 {
+    //public SceneTransition sceneTransition;
     public TextMeshProUGUI countdownText;
     public GameObject stage;
 
     
     public void Start()
     {
+        //Sequence transition = DOTween.Sequence();
+
+        //transition.Append(sceneTransition.FadeIn());
+
         StartCoroutine(CountdownRoutine());
         //stage = GetComponent<Stage>();
     }
 
     IEnumerator CountdownRoutine()
     {
+
+        yield return new WaitForSeconds(3f);
+        //sceneTransition.FadeIn();
+
         // 3, 2, 1 카운트다운을 위한 반복문
         for (int i = 3; i > 0; i--)
         {

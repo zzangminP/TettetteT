@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/1.Scene/SelectBlocks.unity
     guid: e3a857ca010a1f5449a57ddeade969ad
+  - enabled: 1
+    path: Assets/1.Scene/GameClear.unity
+    guid: f117eedb1210efb48883c58311c745be
   m_configObjects: {}

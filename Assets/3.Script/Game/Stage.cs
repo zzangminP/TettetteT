@@ -30,7 +30,7 @@ public class Stage : MonoBehaviour
     //목표 라인
     //[SerializeField]
     public int goalLine;
-    public int deletedLineCount =0;
+    public int deletedLineCount = 0;
 
     private GameObject particleEffect;
     public GameObject particlePrefab;
@@ -360,15 +360,15 @@ public class Stage : MonoBehaviour
         switch(GameManager.instance.currentStage)
         {
             case 1:
-                goalLine = 1;
+                goalLine = 10;
                 break;
             
             case 2:
-                goalLine = 1;
+                goalLine = 20;
                 break;
             
             case 3:
-                goalLine = 1;
+                goalLine = 30;
                 break;
         }
 
@@ -463,13 +463,16 @@ public class Stage : MonoBehaviour
     {
         if(deletedLineCount>=goalLine)
         {
-            if(GameManager.instance.currentStage ==3)
+            if (GameManager.instance.currentStage == 4)
             {
+                Debug.Log("여기야");
                 SceneManager.LoadScene("GameOver");
             }
-            //GameManager.instance.CurrentStage++;
-            SceneManager.LoadScene("SelectBlocks");
-
+            else
+            {
+                //GameManager.instance.CurrentStage++;
+                SceneManager.LoadScene("SelectBlocks");
+            }
         }
 
     }

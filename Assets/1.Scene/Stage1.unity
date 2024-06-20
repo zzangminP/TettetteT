@@ -614,7 +614,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 877649512304890215, guid: eb0e11fff2ef0c04ba6aeaa059ab687c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 877649512304890232, guid: eb0e11fff2ef0c04ba6aeaa059ab687c, type: 3}
       propertyPath: m_Enabled
@@ -1247,7 +1247,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentStageText: {fileID: 1380311366}
-  currentStage: {fileID: 1153124696}
 --- !u!114 &1380311366
 MonoBehaviour:
   m_ObjectHideFlags: 0
