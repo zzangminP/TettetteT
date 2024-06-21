@@ -24,4 +24,15 @@ public class ButtonControll : MonoBehaviour
             sceneTransition.ChangeScene("Stage1");
         }
     }
+    public void Exitbutton()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+                Application.Quit(); 
+#endif
+
+
+
+    }
 }

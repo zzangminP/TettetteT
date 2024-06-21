@@ -126,6 +126,7 @@ public class TetrominoFactory : MonoBehaviour
                 color = new Color32((byte)Random.Range(0, 256), (byte)Random.Range(0, 256), (byte)Random.Range(0, 256), 255);
                 CreateTile(tetromino, new Vector2(0f, 0f), color);
                 break;
+
                 /*
             case 11: // T Å«°Å
                 color = new Color32(250, 180, 51, 255);

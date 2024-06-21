@@ -17,6 +17,7 @@ public class BlockSlotSetActive : MonoBehaviour
                 {
                     for (int i = 0; i < 2; i++)
                     {
+                        Debug.Log(GameManager.instance.currentStage);
                         BlockSlots[i] = transform.GetChild(i + 9);
                         //BlockSlots[1] = transform.GetChild(10);
 
@@ -29,6 +30,7 @@ public class BlockSlotSetActive : MonoBehaviour
                 {
                     for (int i = 0; i < 4; i++)
                     {
+                        Debug.Log(GameManager.instance.currentStage);
                         BlockSlots[i] = transform.GetChild(i + 9);
                         //BlockSlots[1] = transform.GetChild(10);
 
@@ -42,3 +44,5 @@ public class BlockSlotSetActive : MonoBehaviour
 
 
 }
+
+

@@ -7,8 +7,11 @@ using UnityEngine.SceneManagement;
 public class GetBlockIndex : MonoBehaviour
 {
     public Image img;
+    [HideInInspector]
     public string name;
+    [HideInInspector]
     public Transform child;
+    [HideInInspector]
     public Transform grandChild;
     public int[] a;
     public GameObject text;
@@ -17,7 +20,7 @@ public class GetBlockIndex : MonoBehaviour
     private PlayerBlocks pbs;
     public void CheckBlockIndex()
     {
-        text = GameObject.Find("CTText");
+        //text = GameObject.Find("CTText");
         //int[] a = new int[7];
         //pb = 
 
@@ -59,28 +62,6 @@ public class GetBlockIndex : MonoBehaviour
             
             Debug.Log("7개의 테트로미노 선택해야함");
         }
-        //Debug.Log(child);
-        //
-        //
-        //Debug.Log(img);
-        //Debug.Log(img.sprite.name);
-        //Debug.Log(img.sprite.name.GetType());
-        //int numOfChild = this.transform.childCount;
 
-        //for(int i = 0; i < numOfChild; i++)
-        //{
-
-        //Debug.Log(a);
-        //Debug.Log(a.GetType());
-
-        //}
-
-
-
-
-
-
-
-        //return a;
     }
 }

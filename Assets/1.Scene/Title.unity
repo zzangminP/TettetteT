@@ -929,10 +929,22 @@ PrefabInstance:
     - target: {fileID: 3312291582102142076, guid: 4b7807c5c47345a4b82698b8bcdd3334, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 11500000, guid: 6614767aa67864d428b6cf2286addc4f, type: 3}
+      objectReference: {fileID: 618689589}
     - target: {fileID: 3312291582102142076, guid: 4b7807c5c47345a4b82698b8bcdd3334, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312291582102142076, guid: 4b7807c5c47345a4b82698b8bcdd3334, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Exitbutton
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312291582102142076, guid: 4b7807c5c47345a4b82698b8bcdd3334, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ButtonControll, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3312291582102142076, guid: 4b7807c5c47345a4b82698b8bcdd3334, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3312291582102142078, guid: 4b7807c5c47345a4b82698b8bcdd3334, type: 3}
       propertyPath: m_Pivot.x
@@ -1069,6 +1081,7 @@ GameObject:
   - component: {fileID: 620285963}
   - component: {fileID: 620285962}
   - component: {fileID: 620285964}
+  - component: {fileID: 620285965}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -1202,6 +1215,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &620285965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620285961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ab45cd7a913ded4f9e5564bbc19fb29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: 23d6f9dc8a2b9104ca054f896c8cf964, type: 2}
+  bgmSlider: {fileID: 1312465545}
+  sfxSlider: {fileID: 2016305766}
 --- !u!1 &654691766
 GameObject:
   m_ObjectHideFlags: 0
@@ -1799,7 +1827,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1312465544}
   - component: {fileID: 1312465545}
-  - component: {fileID: 1312465546}
   m_Layer: 5
   m_Name: bgmSlider
   m_TagString: Untagged
@@ -1880,7 +1907,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1312465546}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SetVoulme, Assembly-CSharp
         m_MethodName: Setlevel
         m_Mode: 0
@@ -1892,19 +1919,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1312465546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1312465543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ab45cd7a913ded4f9e5564bbc19fb29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mixer: {fileID: 24100000, guid: 23d6f9dc8a2b9104ca054f896c8cf964, type: 2}
 --- !u!1 &1330828631
 GameObject:
   m_ObjectHideFlags: 0
@@ -2723,7 +2737,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2016305765}
   - component: {fileID: 2016305766}
-  - component: {fileID: 2016305767}
   m_Layer: 5
   m_Name: sfxSlider
   m_TagString: Untagged
@@ -2804,7 +2817,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2016305767}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SetVoulme, Assembly-CSharp
         m_MethodName: Setlevel
         m_Mode: 0
@@ -2816,19 +2829,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2016305767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2016305764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ab45cd7a913ded4f9e5564bbc19fb29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mixer: {fileID: 24100000, guid: 23d6f9dc8a2b9104ca054f896c8cf964, type: 2}
 --- !u!1001 &2032762747
 PrefabInstance:
   m_ObjectHideFlags: 0

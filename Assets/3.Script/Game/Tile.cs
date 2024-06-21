@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
 
     public Color color
     {
@@ -20,9 +20,9 @@ public class Tile : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        if (spriteRenderer == null)
-        {
-            Debug.LogError("SpriteRenderer is not attached to the Tile.");
-        }
+        //if (spriteRenderer == null)
+        //{
+        //    Debug.LogError("SpriteRenderer is not attached to the Tile.");
+        //}
     }
 }

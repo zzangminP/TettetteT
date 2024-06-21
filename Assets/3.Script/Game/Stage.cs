@@ -11,6 +11,7 @@ public class Stage : MonoBehaviour
     public Transform tetrominoNode;
     public Transform ghostNode;
     public Transform nextTetrominoNode;
+    
     public TetrominoFactory tetrominoFactory;
     public bool canIMove = true;
 
@@ -103,6 +104,8 @@ public class Stage : MonoBehaviour
         DisplayNextTetromino();
     }
 
+
+    //다음 테트로미노 보여주기
     void DisplayNextTetromino()
     {
         foreach (Transform child in nextTetrominoNode)
@@ -110,7 +113,7 @@ public class Stage : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        tetrominoFactory.CreateTetromino(nextTetrominoIndex, nextTetrominoNode, new Vector3(-12.8f, 7.7f, 0));
+        tetrominoFactory.CreateTetromino(nextTetrominoIndex, nextTetrominoNode,new Vector3(-12.8f, 7.7f, 0));
     }
 
     bool MoveTetromino(Vector3 moveDir, bool isRotate, bool isHardDrop)
@@ -438,6 +441,7 @@ public class Stage : MonoBehaviour
             else
             {
                 //스테이지 클리어시 나올 부분
+
                 StartCoroutine(EndStage_co());
 
                 //StopCoroutine(EndStage_co());
@@ -451,6 +455,7 @@ public class Stage : MonoBehaviour
 
     IEnumerator EndStage_co()
     {
+        canIMove = false;
         Time.timeScale = 0.4f;
         sceneTransition.FadeOut("SelectBlocks");
 
@@ -466,7 +471,7 @@ public class Stage : MonoBehaviour
     public void Start()
     {
         Time.timeScale = 1f;
-        
+        canIMove = true;
         //CountdownController cnt = GetComponent<CountdownController>();
         //cnt.GetReady();
 

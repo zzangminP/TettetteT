@@ -51,13 +51,20 @@ AudioMixerController:
   m_ExposedParameters:
   - guid: ea98d78bf98d676458b0335031397087
     name: MusicVol
+  - guid: 96deb0a1741422542a2d489196a93f04
+    name: SfxVol
   m_AudioMixerGroupViews:
   - guids:
     - bb521b489ee269c41b7a34ef21a3f5bc
     - 87ed6001313e83240952d584f532e00d
     - e090cd6cdb1d8784e937ba2bec345303
     name: View
-  m_CurrentViewIndex: 0
+  - guids:
+    - bb521b489ee269c41b7a34ef21a3f5bc
+    - 87ed6001313e83240952d584f532e00d
+    - e090cd6cdb1d8784e937ba2bec345303
+    name: View - Copy
+  m_CurrentViewIndex: 1
   m_TargetSnapshot: {fileID: 24500006}
 --- !u!243 &24300002
 AudioMixerGroupController:
