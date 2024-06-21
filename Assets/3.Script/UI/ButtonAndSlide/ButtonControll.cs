@@ -15,6 +15,7 @@ public class ButtonControll : MonoBehaviour
     {
         if (scene.name == "Title")
         {
+            GameManager.instance.currentStage = 1;
             sceneTransition.ChangeScene("HowToPlay");
         }
 

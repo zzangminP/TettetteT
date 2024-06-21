@@ -1,7 +1,7 @@
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Stage : MonoBehaviour
 {
@@ -12,6 +12,13 @@ public class Stage : MonoBehaviour
     public Transform ghostNode;
     public Transform nextTetrominoNode;
     public TetrominoFactory tetrominoFactory;
+    public bool canIMove = true;
+
+
+    public SceneTransition sceneTransition;
+
+
+
 
     [Range(4, 40)]
     public int boardWidth = 10;
@@ -29,11 +36,17 @@ public class Stage : MonoBehaviour
 
     //목표 라인
     //[SerializeField]
-    public int goalLine;
+    [HideInInspector]
+    public int goalLine = 10;
+    [HideInInspector]
     public int deletedLineCount = 0;
 
     private GameObject particleEffect;
     public GameObject particlePrefab;
+
+    private GameObject sfx;
+    private AudioSource sfx_as;
+    private AudioClip sfx_clip;
 
 
     private bool isGameover = false;
@@ -47,6 +60,7 @@ public class Stage : MonoBehaviour
 
 
     private CameraShake cmrShake;
+    private float cmrAxis = 0;
 
 
 
@@ -68,7 +82,7 @@ public class Stage : MonoBehaviour
         }
 
 
-        
+
         //Destroy(particleEffect, ps.main.duration);
     }
 
@@ -335,21 +349,134 @@ public class Stage : MonoBehaviour
         return true;
     }
 
-    
-    //IEnumerator Wait_co()
-    //{
-    //    yield return new WaitForSeconds(5f);
-    //}
+
+
+
+    void HardDrop()
+    {
+        sfx_as.PlayOneShot(sfx_clip);
+        while (MoveTetromino(Vector3.down, false, true)) { }
+
+        //SoundManager.instance.GetComponentInChildren<AudioClip>();
+        cmrShake.ShakeForTime(0.5f);
+        //InstantiateParticleEffect();
+    }
+
+    void HandleInput()
+    {
+        if (canIMove)
+        {
+            Vector3 moveDir = Vector3.zero;
+            bool isRotate = false;
+
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                Debug.Log("왼쪽 누름");
+                moveDir.x = -1;
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                Debug.Log("오른쪽 누름");
+                moveDir.x = 1;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+
+                Debug.Log("Z누름");
+                isRotate = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                Debug.Log("아래 누름");
+                moveDir.y = -1;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Debug.Log("space 누름");
+                HardDrop();
+
+                //InstantiateParticleEffect();
+
+            }
+
+            if (Time.time > nextFallTime)
+            {
+                nextFallTime = Time.time + fallCycle;
+                moveDir = Vector3.down;
+                isRotate = false;
+            }
+
+            if (moveDir != Vector3.zero || isRotate)
+            {
+                MoveTetromino(moveDir, isRotate, false);
+            }
+
+            if (ghostTetromino != null)
+            {
+                UpdateGhostPosition();
+            }
+
+        }
+        else
+        {
+            return;
+        }
+
+    }
+
+    void CheckGoal()
+    {
+        if (deletedLineCount >= goalLine)
+        {
+            if (GameManager.instance.currentStage == 4)
+            {
+                Debug.Log("여기야");
+                SceneManager.LoadScene("GameClear");
+            }
+            else
+            {
+                //스테이지 클리어시 나올 부분
+                StartCoroutine(EndStage_co());
+
+                //StopCoroutine(EndStage_co());
+                //GameManager.instance.currentStage++;
+
+                //SceneManager.LoadScene("SelectBlocks");
+            }
+        }
+
+    }
+
+    IEnumerator EndStage_co()
+    {
+        Time.timeScale = 0.4f;
+        sceneTransition.FadeOut("SelectBlocks");
+
+        yield return new WaitForSeconds(0.1f);
+
+    }
+
+
+
+
+
 
     public void Start()
     {
-
-
+        Time.timeScale = 1f;
+        
         //CountdownController cnt = GetComponent<CountdownController>();
         //cnt.GetReady();
 
         cmrShake = GameObject.FindWithTag("MainCamera").GetComponent<CameraShake>();
 
+
+
+        sfx = GameObject.Find("Sfx");
+        sfx_as = sfx.GetComponent<AudioSource>();
+        sfx_clip = sfx_as.clip;
         /*
         if (tetrominoFactory == null)
         {
@@ -357,17 +484,21 @@ public class Stage : MonoBehaviour
             return;
         }*/
 
-        switch(GameManager.instance.currentStage)
+        switch (GameManager.instance.currentStage)
         {
             case 1:
                 goalLine = 10;
                 break;
-            
+
             case 2:
+                goalLine = 15;
+                break;
+
+            case 3:
                 goalLine = 20;
                 break;
-            
-            case 3:
+
+            case 4:
                 goalLine = 30;
                 break;
         }
@@ -375,7 +506,7 @@ public class Stage : MonoBehaviour
 
 
         // 팩토리에 타일 프리팹 할당
-        tetrominoFactory.tilePrefab = tilePrefab; 
+        tetrominoFactory.tilePrefab = tilePrefab;
 
         halfWidth = Mathf.RoundToInt(boardWidth * 0.5f);
         halfHeight = Mathf.RoundToInt(boardHeight * 0.5f);
@@ -397,91 +528,11 @@ public class Stage : MonoBehaviour
         nextTetrominoIndex = GameManager.instance.choosedTetroIndex[Random.Range(0, 7)];
         SpawnNextTetromino();
     }
-    void HardDrop()
-    {
-        while (MoveTetromino(Vector3.down, false, true)) { }
-        cmrShake.ShakeForTime(0.5f);
-        //InstantiateParticleEffect();
-    }
-
-    void HandleInput()
-    {
-        Vector3 moveDir = Vector3.zero;
-        bool isRotate = false;
-
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            Debug.Log("왼쪽 누름");
-            moveDir.x = -1;
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            Debug.Log("오른쪽 누름");
-            moveDir.x = 1;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-
-            Debug.Log("Z누름");
-            isRotate = true;
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            Debug.Log("아래 누름");
-            moveDir.y = -1;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("space 누름");
-            HardDrop();
-
-            //InstantiateParticleEffect();
-
-        }
-
-        if (Time.time > nextFallTime)
-        {
-            nextFallTime = Time.time + fallCycle;
-            moveDir = Vector3.down;
-            isRotate = false;
-        }
-
-        if (moveDir != Vector3.zero || isRotate)
-        {
-            MoveTetromino(moveDir, isRotate, false);
-        }
-
-        if (ghostTetromino != null)
-        {
-            UpdateGhostPosition();
-        }
-    }
-
-    void CheckGoal()
-    {
-        if(deletedLineCount>=goalLine)
-        {
-            if (GameManager.instance.currentStage == 4)
-            {
-                Debug.Log("여기야");
-                SceneManager.LoadScene("GameOver");
-            }
-            else
-            {
-                //GameManager.instance.CurrentStage++;
-                SceneManager.LoadScene("SelectBlocks");
-            }
-        }
-
-    }
-
 
     void Update()
     {
         HandleInput();
-        
+
     }
 
 }

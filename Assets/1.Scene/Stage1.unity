@@ -790,6 +790,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 814640434}
   m_CullTransparentMesh: 1
+--- !u!114 &946054059 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 877649512304890233, guid: eb0e11fff2ef0c04ba6aeaa059ab687c, type: 3}
+  m_PrefabInstance: {fileID: 706285485}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68df8713339827640b5bac270362e31b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1076850690
 GameObject:
   m_ObjectHideFlags: 0
@@ -1084,10 +1095,12 @@ MonoBehaviour:
   ghostNode: {fileID: 1255216975}
   nextTetrominoNode: {fileID: 370471698}
   tetrominoFactory: {fileID: 370471699}
+  canIMove: 1
+  sceneTransition: {fileID: 946054059}
   boardWidth: 10
   boardHeight: 20
   fallCycle: 0.875
-  goalLine: 10
+  goalLine: 0
   deletedLineCount: 0
   particlePrefab: {fileID: 8117973386823955798, guid: c2362119fe149cd4b8ad89cd2a013da3, type: 3}
 --- !u!1 &1204165623

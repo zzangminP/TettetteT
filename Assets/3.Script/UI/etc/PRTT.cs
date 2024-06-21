@@ -35,6 +35,7 @@ public class PRTT : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.R))
         {
+            GameManager.instance.Init();
             SceneManager.LoadScene("Title");
         }
     }

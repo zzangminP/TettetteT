@@ -11,6 +11,8 @@ public class SceneTransition : MonoBehaviour
     private void Start()
     {
         // 시작할 때 페이드 인
+        Time.timeScale = 1f;
+
         FadeIn();
     }
 

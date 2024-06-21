@@ -11,11 +11,13 @@ public class GetBlockIndex : MonoBehaviour
     public Transform child;
     public Transform grandChild;
     public int[] a;
+    public GameObject text;
     
     private Transform pb;
     private PlayerBlocks pbs;
     public void CheckBlockIndex()
     {
+        text = GameObject.Find("CTText");
         //int[] a = new int[7];
         //pb = 
 
@@ -51,6 +53,10 @@ public class GetBlockIndex : MonoBehaviour
         }
         catch
         {
+            
+
+            text.SetActive(true);
+            
             Debug.Log("7개의 테트로미노 선택해야함");
         }
         //Debug.Log(child);

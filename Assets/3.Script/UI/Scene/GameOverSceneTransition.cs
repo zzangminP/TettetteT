@@ -38,6 +38,7 @@ public class GameOverSceneTransition : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.R))
         {
+            GameManager.instance.Init();
             SceneManager.LoadScene("Title");
         }
     }
